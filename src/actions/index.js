@@ -1,8 +1,12 @@
+import Axios from 'axios';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
 export const fetchPosts = () => {
-    return {
-        type : 'FETCH_POSTS',
-        payload: null
-    };
+    return async (dispatch) => {
+        const response = await jsonPlaceholder.get('/posts');
+        dispatch({
+            type : 'FETCH_POSTS',
+            payload: response
+        });
+    }
 };
