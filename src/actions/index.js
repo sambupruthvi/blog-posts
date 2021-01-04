@@ -6,8 +6,13 @@ import _ from 'lodash';
 export const fetchPostsAndUsers = () => {
     return async (dispatch, getState) => {
         await dispatch(fetchPosts());
-        const userIds = _.uniq(_.map(getState().posts, 'userId'));
-        userIds.forEach(id => dispatch(fetchUser(id)));
+        // const userIds = _.uniq(_.map(getState().posts, 'userId'));
+        // userIds.forEach(id => dispatch(fetchUser(id)));
+        _.chain(getState().posts)
+         .map('userId') // automatically passes the above argument as first arguments to the chained functions. == map(getState().posts, 'userId')
+         .uniq()
+         .forEach(id => dispatch(fetchUser(id)))
+         .value() // its like execute() the chain function
     }
 }
 
