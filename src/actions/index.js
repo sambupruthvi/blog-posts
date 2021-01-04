@@ -12,7 +12,7 @@ export const fetchPosts = () => {
 };
 
 export const fetchUser = (id) => {
-    return async (dispatch) => {
+    return (dispatch) => {
         _fetchUser(id, dispatch);
     }
 }
